@@ -1,0 +1,33 @@
+# Lychee link checker ignore patterns
+
+# Localhost and local IPs
+http://localhost*
+https://localhost*
+http://127.0.0.1*
+https://127.0.0.1*
+http://192.168.*
+https://192.168.*
+http://10.*
+https://10.*
+
+# Email addresses
+mailto:*
+
+# GitHub actions that may not be public
+https://github.com/*/actions/*
+
+# Vendor sites that may block automated requests
+https://www.dn-solutions.com/*
+https://www.kuka.com/*
+https://www.fastems.com/*
+https://www.zeiss.com/*
+https://www.zoller.info/*
+https://www.sick.com/*
+https://www.mobile-industrial-robots.com/*
+
+# PDF files that may not be directly linkable
+*.pdf
+
+# Temporary or example URLs
+https://example.com*
+http://example.com*

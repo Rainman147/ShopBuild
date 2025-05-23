@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .machine { fill: #4CAF50; stroke: #2E7D32; stroke-width: 2; }
+      .robot { fill: #FF9800; stroke: #F57C00; stroke-width: 2; }
+      .storage { fill: #2196F3; stroke: #1976D2; stroke-width: 2; }
+      .quality { fill: #9C27B0; stroke: #7B1FA2; stroke-width: 2; }
+      .safety { fill: #F44336; stroke: #D32F2F; stroke-width: 1; opacity: 0.3; }
+      .reach { fill: none; stroke: #FF9800; stroke-width: 1; stroke-dasharray: 5,5; opacity: 0.5; }
+      .text { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; }
+      .label { font-family: Arial, sans-serif; font-size: 10px; }
+      .dimension { font-family: Arial, sans-serif; font-size: 8px; fill: #666; }
+    </style>
+  </defs>
+  
+  <!-- Background Grid -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#E0E0E0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid)" />
+  
+  <!-- Title -->
+  <text x="400" y="25" text-anchor="middle" class="text" font-size="16">Hyperion Lights-Out Cell Layout v0.1</text>
+  
+  <!-- Cell Perimeter -->
+  <rect x="50" y="50" width="700" height="500" fill="none" stroke="#333" stroke-width="3"/>
+  <text x="55" y="45" class="dimension">9.1m × 7.6m (30ft × 25ft) Cell Envelope</text>
+  
+  <!-- DN Solutions DVF 6500 Machine Tool -->
+  <rect x="250" y="200" width="120" height="80" class="machine"/>
+  <text x="310" y="235" text-anchor="middle" class="text" fill="white">DVF 6500</text>
+  <text x="310" y="250" text-anchor="middle" class="label" fill="white">5-Axis VMC</text>
+  <text x="310" y="290" text-anchor="middle" class="dimension">3.7m × 2.5m</text>
+  
+  <!-- KUKA Robot -->
+  <circle cx="180" cy="240" r="25" class="robot"/>
+  <text x="180" y="245" text-anchor="middle" class="text" fill="white">KUKA</text>
+  <text x="180" y="275" text-anchor="middle" class="label">KR 210</text>
+  
+  <!-- Robot Reach Envelope -->
+  <circle cx="180" cy="240" r="95" class="reach"/>
+  <text x="275" y="240" class="dimension">3.1m reach</text>
+  
+  <!-- Fastems Pallet Tower -->
+  <rect x="80" y="100" width="60" height="120" class="storage"/>
+  <text x="110" y="155" text-anchor="middle" class="text" fill="white">Fastems</text>
+  <text x="110" y="170" text-anchor="middle" class="label" fill="white">FPT-630</text>
+  <text x="110" y="235" text-anchor="middle" class="dimension">2.0m × 4.0m</text>
+  
+  <!-- ZEISS CMM -->
+  <rect x="450" y="150" width="100" height="120" class="quality"/>
+  <text x="500" y="205" text-anchor="middle" class="text" fill="white">ZEISS</text>
+  <text x="500" y="220" text-anchor="middle" class="label" fill="white">PRISMO</text>
+  <text x="500" y="285" text-anchor="middle" class="dimension">2.8m × 3.8m</text>
+  
+  <!-- Zoller SmartCabinet -->
+  <rect x="600" y="200" width="80" height="60" class="storage"/>
+  <text x="640" y="225" text-anchor="middle" class="text" fill="white">Zoller</text>
+  <text x="640" y="240" text-anchor="middle" class="label" fill="white">Cabinet</text>
+  <text x="640" y="275" text-anchor="middle" class="dimension">2.0m × 1.2m</text>
+  
+  <!-- Tool Presetter -->
+  <rect x="600" y="120" width="60" height="60" class="storage"/>
+  <text x="630" y="145" text-anchor="middle" class="text" fill="white">Zoller</text>
+  <text x="630" y="160" text-anchor="middle" class="label" fill="white">Venturion</text>
+  
+  <!-- Control Cabinet -->
+  <rect x="80" y="350" width="80" height="100" class="machine"/>
+  <text x="120" y="395" text-anchor="middle" class="text" fill="white">Siemens</text>
+  <text x="120" y="410" text-anchor="middle" class="label" fill="white">S7-1500F</text>
+  
+  <!-- Operator Station -->
+  <rect x="200" y="400" width="60" height="40" class="machine"/>
+  <text x="230" y="420" text-anchor="middle" class="text" fill="white">HMI</text>
+  
+  <!-- Safety Scanner Positions -->
+  <circle cx="70" cy="70" r="8" class="safety" stroke="#F44336"/>
+  <circle cx="730" cy="70" r="8" class="safety" stroke="#F44336"/>
+  <circle cx="70" cy="530" r="8" class="safety" stroke="#F44336"/>
+  <circle cx="730" cy="530" r="8" class="safety" stroke="#F44336"/>
+  <text x="70" y="90" text-anchor="middle" class="dimension">SICK Scanner</text>
+  
+  <!-- Material Flow Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+            refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  
+  <!-- Raw Stock to Robot -->
+  <path d="M 140,160 Q 160,180 180,200" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="150" y="175" class="dimension">Raw Stock</text>
+  
+  <!-- Robot to Machine -->
+  <path d="M 205,240 L 250,240" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="215" y="235" class="dimension">Load</text>
+  
+  <!-- Machine to CMM -->
+  <path d="M 370,240 Q 400,200 450,200" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="390" y="215" class="dimension">QC</text>
+  
+  <!-- Tool Flow -->
+  <path d="M 600,225 Q 550,225 370,225" fill="none" stroke="#9C27B0" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="550" y="220" class="dimension" fill="#9C27B0">Tool Flow</text>
+  
+  <!-- MiR AMR Path -->
+  <rect x="350" y="450" width="40" height="30" fill="#FF5722" stroke="#D84315" stroke-width="2"/>
+  <text x="370" y="470" text-anchor="middle" class="text" fill="white">MiR</text>
+  <path d="M 370,450 Q 300,400 140,250 Q 140,300 370,450" fill="none" stroke="#FF5722" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="250" y="350" class="dimension" fill="#FF5722">AMR Route</text>
+  
+  <!-- Dimensions -->
+  <line x1="50" y1="570" x2="750" y2="570" stroke="#666" stroke-width="1"/>
+  <text x="400" y="585" text-anchor="middle" class="dimension">9.1m (30 ft)</text>
+  
+  <line x1="20" y1="50" x2="20" y2="550" stroke="#666" stroke-width="1"/>
+  <text x="15" y="300" text-anchor="middle" class="dimension" transform="rotate(-90, 15, 300)">7.6m (25 ft)</text>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 570)">
+    <rect x="0" y="10" width="15" height="10" class="machine"/>
+    <text x="20" y="20" class="label">Production Equipment</text>
+    
+    <rect x="150" y="10" width="15" height="10" class="robot"/>
+    <text x="170" y="20" class="label">Material Handling</text>
+    
+    <rect x="280" y="10" width="15" height="10" class="storage"/>
+    <text x="300" y="20" class="label">Storage/Automation</text>
+    
+    <rect x="420" y="10" width="15" height="10" class="quality"/>
+    <text x="440" y="20" class="label">Quality Control</text>
+    
+    <circle cx="557" cy="15" r="5" class="safety" stroke="#F44336"/>
+    <text x="570" y="20" class="label">Safety Systems</text>
+  </g>
+</svg>

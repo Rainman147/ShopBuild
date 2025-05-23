@@ -35,8 +35,13 @@ jobs:
         with:
           python-version: '3.11'
           
-      - name: Install PyYAML and jsonschema
-        run: pip install PyYAML jsonschema
+      - name: Install PyYAML and yamllint
+        run: pip install PyYAML yamllint
+        
+      - name: Validate YAML syntax with yamllint
+        run: |
+          yamllint bom/bom.yaml
+          yamllint .github/workflows/ci.yml
         
       - name: Validate BOM YAML syntax
         run: python -c "import yaml; yaml.safe_load(open('bom/bom.yaml'))"
@@ -53,7 +58,7 @@ jobs:
               assert section in bom, f'Missing required section: {section}'
           
           # Check that each item has required fields
-          for category in ['production', 'material_handling', 'quality', 'tooling', 'safety', 'controls']:
+          for category in ['production', 'material_handling', 'quality', 'tooling', 'safety', 'controls', 'amr']:
               if category in bom:
                   for item in bom[category]:
                       required_fields = ['subsystem', 'vendor', 'model', 'qty', 'unit_price_usd', 'status']
@@ -69,13 +74,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install markdown-link-check
-        run: npm install -g markdown-link-check
-        
+      - name: Install lychee
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-gnu.tar.gz | tar -xzf - -C /usr/local/bin
+          
       - name: Check links in documentation
         run: |
-          find . -name "*.md" -not -path "./node_modules/*" | \
-          xargs -I {} markdown-link-check {} --config .github/mlc-config.json
+          lychee --exclude-file .lycheeignore --verbose --no-progress '**/*.md'
           
   structure-check:
     name: Validate Repository Structure
