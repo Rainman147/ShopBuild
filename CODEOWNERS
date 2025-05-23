@@ -1,0 +1,15 @@
+# Global owners
+* @hyperion-manufacturing/automation-team
+
+# Research and specifications
+/research/ @hyperion-manufacturing/research-team
+/docs/ @hyperion-manufacturing/systems-engineering
+
+# Bill of materials and costing
+/bom/ @hyperion-manufacturing/procurement
+
+# Layout and mechanical design
+/layout/ @hyperion-manufacturing/mechanical-design
+
+# Integration and controls
+/integration/ @hyperion-manufacturing/controls-team

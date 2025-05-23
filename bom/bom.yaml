@@ -1,0 +1,177 @@
+# Hyperion Manufacturing Lights-Out Cell
+# Bill of Materials - Version 0.1
+
+cell_info:
+  name: "Hyperion Lights-Out Cell v0.1"
+  version: "0.1.0"
+  date: "2025-05-23"
+  engineer: "Research-Agent-Alpha"
+  status: "draft"
+
+# Core Production Equipment
+production:
+  - subsystem: machine-tool
+    vendor: "DN Solutions"
+    model: "DVF 6500"
+    function: "5-axis vertical machining center"
+    qty: 1
+    unit_price_usd: 850000
+    lead_time_weeks: 18
+    interfaces: ["cufos_control", "ethernet", "automation_interfaces_tbd"]
+    status: "researched"
+    notes: "ø650×600mm table, 60-120 tool ATC, 18k RPM spindle, automation-ready"
+
+  - subsystem: robot
+    vendor: "KUKA"
+    model: "KR 210 R3100 ultra"
+    function: "6-axis industrial robot for material handling"
+    qty: 1
+    unit_price_usd: 95000
+    lead_time_weeks: 16
+    interfaces: ["kuka_connect", "profinet", "opcua", "profisafe"]
+    status: "researched"
+    notes: "210kg payload, 3.1m reach, IP65/67, PLd/SIL2 safety, KR C5 controller"
+    alternatives:
+      - model: "KR 120 R3500"
+        price_usd: 80000
+        notes: "120kg payload, 3.5m reach, cost savings option"
+      - model: "KR 300 R2500 ultra"
+        price_usd: 140000
+        notes: "300kg payload, 2.5m reach, heavy duty option"
+
+# Material Storage & Handling
+material_handling:
+  - subsystem: pallet-tower
+    vendor: "Fastems"
+    model: "FMS Tower 4040"
+    function: "Automated pallet storage tower"
+    qty: 1
+    unit_price_usd: 180000
+    lead_time_weeks: 16
+    interfaces: ["opcua", "profibus"]
+    status: "candidate"
+    notes: "40 pallet positions, 400x400mm pallets"
+
+  - subsystem: pallet-system
+    vendor: "VERO-S"
+    model: "NSE5 138"
+    function: "Zero-point clamping system"
+    qty: 50
+    unit_price_usd: 2800
+    lead_time_weeks: 8
+    interfaces: ["pneumatic"]
+    status: "candidate"
+    notes: "138mm bolt circle, standard interface"
+
+# Quality Control
+quality:
+  - subsystem: cmm
+    vendor: "Hexagon"
+    model: "Global Classic 7.10.7"
+    function: "Coordinate measuring machine"
+    qty: 1
+    unit_price_usd: 220000
+    lead_time_weeks: 14
+    interfaces: ["opcua", "tcp_ip"]
+    status: "candidate"
+    notes: "700x1000x700mm measuring volume"
+
+  - subsystem: probe-system
+    vendor: "Renishaw"
+    model: "OMP60"
+    function: "Machine tool probing system"
+    qty: 1
+    unit_price_usd: 15000
+    lead_time_weeks: 6
+    interfaces: ["radio", "skip_signal"]
+    status: "candidate"
+    notes: "For in-process measurement and setup"
+
+# Tool Management
+tooling:
+  - subsystem: tool-presetter
+    vendor: "Zoller"
+    model: "venturion 600"
+    function: "Tool presetting and management"
+    qty: 1
+    unit_price_usd: 95000
+    lead_time_weeks: 10
+    interfaces: ["opcua", "ethernet"]
+    status: "candidate"
+    notes: "Automated tool measurement and data management"
+
+  - subsystem: tool-storage
+    vendor: "AutoCrib"
+    model: "VTX500"
+    function: "Automated tool dispensing system"
+    qty: 1
+    unit_price_usd: 45000
+    lead_time_weeks: 8
+    interfaces: ["rest_api", "tcp_ip"]
+    status: "candidate"
+    notes: "500 tool positions with tracking"
+
+# Safety & Infrastructure
+safety:
+  - subsystem: safety-system
+    vendor: "Pilz"
+    model: "PSENscan"
+    function: "Safety laser scanner system"
+    qty: 4
+    unit_price_usd: 8500
+    lead_time_weeks: 4
+    interfaces: ["profisafe", "ethernet"]
+    status: "candidate"
+    notes: "Perimeter protection for robot cell"
+
+  - subsystem: light-curtains
+    vendor: "Banner"
+    model: "EZ-SCREEN LS"
+    function: "Safety light curtain"
+    qty: 2
+    unit_price_usd: 3200
+    lead_time_weeks: 2
+    interfaces: ["safety_relay", "24vdc"]
+    status: "candidate"
+    notes: "Machine access protection"
+
+# Control System
+controls:
+  - subsystem: plc
+    vendor: "Siemens"
+    model: "S7-1500"
+    function: "Programmable logic controller"
+    qty: 1
+    unit_price_usd: 12000
+    lead_time_weeks: 4
+    interfaces: ["profinet", "opcua", "ethernet"]
+    status: "candidate"
+    notes: "Cell coordination and safety logic"
+
+  - subsystem: hmi
+    vendor: "Siemens"
+    model: "SIMATIC HMI Comfort Panel"
+    function: "Human machine interface"
+    qty: 2
+    unit_price_usd: 4500
+    lead_time_weeks: 3
+    interfaces: ["profinet", "ethernet"]
+    status: "candidate"
+    notes: "15-inch touchscreen for operator interface"
+
+# Cost Summary
+cost_summary:
+  total_equipment_cost: 1435000  # Updated for robot pricing
+  installation_estimate: 287000  # 20% of equipment
+  contingency: 344000           # 20% of total
+  total_project_cost: 2066000
+
+# Status Tracking
+research_status:
+  production: 85
+  material_handling: 75  # Robot research completed
+  quality: 50
+  tooling: 30
+  safety: 70
+  controls: 80
+  overall: 72

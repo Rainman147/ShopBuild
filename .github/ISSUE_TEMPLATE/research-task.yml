@@ -1,0 +1,91 @@
+name: 📚 Research Task
+description: Track specific research activities for components and vendors
+title: "RESEARCH: [Component/Vendor] - [Specific Task]"
+labels: ["research", "documentation"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Research Category
+      description: What type of research is this?
+      options:
+        - Vendor Investigation
+        - Technical Specification
+        - Pricing/Procurement
+        - Interface/Integration
+        - Alternative Analysis
+        - Validation/Testing
+    validations:
+      required: true
+
+  - type: input
+    id: component
+    attributes:
+      label: Component/System
+      description: Which component or system is being researched?
+      placeholder: "DN Solutions DVF 6500"
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Research Objective
+      description: What specific information are we trying to gather?
+      placeholder: "Determine exact OPC-UA companion specification version and available data points"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Expected Deliverables
+      description: What files/documents should be created from this research?
+      placeholder: |
+        - [ ] Vendor datasheet PDF in research/machines/dn-solutions-dvf6500/
+        - [ ] Summary markdown file
+        - [ ] Updated BOM entry with accurate pricing
+        - [ ] Interface specification document
+      value: |
+        - [ ] Deliverable 1
+        - [ ] Deliverable 2
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Information Sources
+      description: Where should we look for this information?
+      placeholder: |
+        - Vendor website and documentation
+        - Distributor contacts
+        - Industry publications
+        - Existing installations (case studies)
+        - Technical forums
+
+  - type: input
+    id: assignee
+    attributes:
+      label: Assigned Researcher
+      description: Who is responsible for this research?
+      placeholder: "@research-agent-alpha"
+
+  - type: input
+    id: due_date
+    attributes:
+      label: Due Date
+      description: When should this research be completed? (YYYY-MM-DD)
+      placeholder: "2025-06-01"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this research?
+      options:
+        - Sprint 0 (Immediate)
+        - Phase 1 (Design)
+        - Phase 2 (Procurement)
+        - Phase 3 (Implementation)
+        - Future (Nice to have)
+    validations:
+      required: true

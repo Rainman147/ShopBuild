@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    name: Lint Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+        
+      - name: Lint Markdown files
+        run: markdownlint "**/*.md" --ignore node_modules
+        
+  validate-bom:
+    name: Validate Bill of Materials
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install PyYAML and jsonschema
+        run: pip install PyYAML jsonschema
+        
+      - name: Validate BOM YAML syntax
+        run: python -c "import yaml; yaml.safe_load(open('bom/bom.yaml'))"
+        
+      - name: Check BOM required fields
+        run: |
+          python -c "
+          import yaml
+          with open('bom/bom.yaml') as f:
+              bom = yaml.safe_load(f)
+          
+          required_sections = ['cell_info', 'production', 'cost_summary']
+          for section in required_sections:
+              assert section in bom, f'Missing required section: {section}'
+          
+          # Check that each item has required fields
+          for category in ['production', 'material_handling', 'quality', 'tooling', 'safety', 'controls']:
+              if category in bom:
+                  for item in bom[category]:
+                      required_fields = ['subsystem', 'vendor', 'model', 'qty', 'unit_price_usd', 'status']
+                      for field in required_fields:
+                          assert field in item, f'Missing field {field} in {category} item {item.get(\"model\", \"unknown\")}'
+          
+          print('BOM validation passed')
+          "
+          
+  check-links:
+    name: Check External Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+        
+      - name: Check links in documentation
+        run: |
+          find . -name "*.md" -not -path "./node_modules/*" | \
+          xargs -I {} markdown-link-check {} --config .github/mlc-config.json
+          
+  structure-check:
+    name: Validate Repository Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check required directories exist
+        run: |
+          required_dirs=("docs" "research" "layout" "bom" "integration" ".github/workflows")
+          for dir in "${required_dirs[@]}"; do
+            if [ ! -d "$dir" ]; then
+              echo "Missing required directory: $dir"
+              exit 1
+            fi
+          done
+          echo "Directory structure validation passed"
+          
+      - name: Check required files exist
+        run: |
+          required_files=("README.md" "LICENSE" "CODEOWNERS" "bom/bom.yaml" "docs/vision.md")
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Missing required file: $file"
+              exit 1
+            fi
+          done
+          echo "Required files validation passed"

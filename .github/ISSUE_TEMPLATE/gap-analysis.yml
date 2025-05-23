@@ -1,0 +1,87 @@
+name: 🔍 Gap Analysis
+description: Track missing information or unresolved questions in the lights-out cell design
+title: "GAP: [Brief description]"
+labels: ["gap", "research-needed"]
+body:
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Subsystem
+      description: Which subsystem does this gap relate to?
+      options:
+        - Machine Tool (DVF 6500)
+        - Robot (KUKA)
+        - Material Handling (Pallets/Tower)
+        - Quality Control (CMM)
+        - Tool Management
+        - Safety Systems
+        - Control System
+        - Integration
+        - Layout/Mechanical
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Gap Description
+      description: Describe what information is missing or what question needs to be answered
+      placeholder: "Example: Missing interface specification for DVF 6500 OPC-UA server"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How critical is this gap to the project?
+      options:
+        - Critical (Blocks progress)
+        - High (Significant impact)
+        - Medium (Moderate impact)
+        - Low (Nice to have)
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: What happens if this gap is not resolved?
+      placeholder: "Cannot proceed with integration planning..."
+
+  - type: textarea
+    id: research_tasks
+    attributes:
+      label: Research Tasks
+      description: List specific tasks needed to close this gap
+      placeholder: |
+        - [ ] Contact DN Solutions for OPC-UA companion specification
+        - [ ] Review DVF 6500 technical manual section 8.3
+        - [ ] Test OPC-UA connectivity with demo client
+      value: |
+        - [ ] Task 1
+        - [ ] Task 2
+        - [ ] Task 3
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Target Resolution Date
+      description: When do we need this resolved? (YYYY-MM-DD)
+      placeholder: "2025-06-15"
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Required Resources
+      description: What resources are needed to resolve this gap?
+      placeholder: "Vendor contact, test equipment, CAD software access..."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Approaches
+      description: Are there any workarounds or alternative solutions?
+      placeholder: "Could use Modbus interface as fallback..."
